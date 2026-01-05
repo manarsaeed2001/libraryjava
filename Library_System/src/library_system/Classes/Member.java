@@ -13,9 +13,6 @@ public class Member extends Person {
     public String getMembershipType() {
         return membershipType;
     }
-    public double calculateFee(int daysLate) {
-        return daysLate * 2.0;
-    }
 
 
     // ====== Polymorphism base method ======

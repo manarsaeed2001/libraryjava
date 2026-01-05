@@ -1,6 +1,6 @@
 package library_system.Classes;
 
-public class Book extends Item {
+public class Book extends Item implements Searchable {
     private int pagenum;
     private static final long serialVersionUID = 1L;
 
@@ -13,9 +13,15 @@ public class Book extends Item {
         return pagenum;
     }
     
-    public void stepagenum(){
-         this.pagenum = pagenum;
+    public void setpagenum(int pagenum) {
+        this.pagenum = pagenum;
     }
+
+    @Override
+    public boolean matches(String keyword) {
+        return getTitle().toLowerCase().contains(keyword.toLowerCase());
+    }
+
 
     @Override
     public void display() {
