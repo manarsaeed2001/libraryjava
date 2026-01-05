@@ -3,6 +3,7 @@ package library_system.Classes;
 import java.util.*;
 import javax.swing.JOptionPane;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 
 
@@ -17,6 +18,9 @@ public class Library implements Serializable{
         members = members_;
         employees = emp;
     }
+ // قائمة بجميع عمليات الاستعارة
+    private ArrayList<Loan> loans = new ArrayList<>();
+
 
 
 
