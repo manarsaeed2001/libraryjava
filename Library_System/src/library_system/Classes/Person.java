@@ -24,6 +24,6 @@ public abstract class Person implements Serializable {
     public String getContactInfo() {
         return contactInfo;
     }
-//
+
     public abstract void displayInfo();
 }
