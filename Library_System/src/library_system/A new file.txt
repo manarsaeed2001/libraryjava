@@ -1,0 +1,9 @@
+Items:
+Magazine Title: farah  Author: farah  Item ID: farah  Issue Number: 10  
+Book Title: farah  Author: farahffff  Item ID: 10  Number of Pages: 20  
+
+Members:
+Member Name: farah  Member ID: farah  Contact Info: farah  Membership Type: Standard  
+
+Employees:
+Employee Name: farah  Employee ID: farah  Contact Info: farah  Job Title: librarian  Salary: 2000.0  
