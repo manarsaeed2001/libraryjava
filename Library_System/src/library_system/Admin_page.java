@@ -222,7 +222,7 @@ public class Admin_page extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-      Library lib = new Library(items_,members_,emp);
+    	Library lib = new Library();
       JOptionPane.showMessageDialog(rootPane, lib.displayAllMembers());
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -233,26 +233,26 @@ public class Admin_page extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-          Library lib = new Library(items_,members_,emp);
+    	Library lib = new Library();
       JOptionPane.showMessageDialog(rootPane, lib.displayAllEmployees());
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         String idtodel = JOptionPane.showInputDialog("ID to Find ");
-        Library lib = new Library(items_,members_,emp);
+        Library lib = new Library();
         Member member_fined = lib.findMemberById(idtodel);
         JOptionPane.showMessageDialog(rootPane, member_fined.info());
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
          String idtodel = JOptionPane.showInputDialog("ID to Delete ");
-        Library lib = new Library(items_,members_,emp);
-        JOptionPane.showMessageDialog(rootPane, lib.deleteMemebrById(idtodel));
+         Library lib = new Library();
+         JOptionPane.showMessageDialog(rootPane, lib.deleteMemberById(idtodel));
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
          String idtodel = JOptionPane.showInputDialog("ID to Delete ");
-        Library lib = new Library(items_,members_,emp);
+         Library lib = new Library();
         JOptionPane.showMessageDialog(rootPane, lib.deleteEmployeeById(idtodel));
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -269,8 +269,8 @@ public class Admin_page extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        Library lib = new Library(items_,members_,emp);
-        lib.saveToFile("A new file.txt", lib);
+    	Library lib = new Library();
+    	FileManager.saveLibrary("A new file.txt", lib);
     }//GEN-LAST:event_jButton9ActionPerformed
 
   

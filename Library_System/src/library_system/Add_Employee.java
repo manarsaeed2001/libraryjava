@@ -158,7 +158,7 @@ public class Add_Employee extends javax.swing.JFrame {
        String Joptype = type.getSelectedItem().toString();
        int Salary = Integer.parseInt(salaryy.getText());
        
-        Library lib = new Library(items_,members_,emp);
+       Library lib = new Library();
         Employee Emp = new Employee(Name,ID,Contact_info,Joptype,Salary);
         lib.addEmployee(Emp);
         JOptionPane.showMessageDialog(rootPane, "Adding Employee done..");

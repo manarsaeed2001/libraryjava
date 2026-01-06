@@ -175,7 +175,7 @@ public class Add_item extends javax.swing.JFrame {
     }//GEN-LAST:event_magazineeActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     Library lib = new Library(items_,members_,emp);
+    	Library lib = new Library();
         String title = titlle.getText();
       String Authour = authourr.getText();
       String iD = idd.getText();

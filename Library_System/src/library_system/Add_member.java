@@ -148,7 +148,7 @@ public class Add_member extends javax.swing.JFrame {
        String Contact_info = contact.getText();
        String Membership_type = type.getSelectedItem().toString();
        
-        Library lib = new Library(items_,members_,emp);
+       Library lib = new Library();
         Member memb = new Member(Name,ID,Contact_info,Membership_type);
         lib.addMember(memb);
         JOptionPane.showMessageDialog(rootPane, "Adding member done..");

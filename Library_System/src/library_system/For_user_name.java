@@ -120,7 +120,7 @@ public class For_user_name extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
      String name = Name.getText();
      String id = ID.getText();      
-        Library lib = new Library(items_,members_,emp);
+     Library lib = new Library();
         
         // Log in as employee
         if(loged==1){

@@ -1,8 +1,9 @@
 package library_system.Classes;
 
 public class Member extends Person {
+
     private String membershipType;
-        private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     public Member(String name, String id, String contactInfo, String membershipType) {
         super(name, id, contactInfo);
@@ -13,25 +14,27 @@ public class Member extends Person {
         return membershipType;
     }
 
-    @Override
+    // ===== Base method for Polymorphism =====
+    // الأعضاء العاديين يدفعون رسوم أعلى
+    public double calculateFee(int daysLate) {
+        return daysLate * 2.0;
+    }
+
     public void displayInfo() {
         System.out.println("Member Name: " + getName());
         System.out.println("Member ID: " + getId());
         System.out.println("Contact Info: " + getContactInfo());
         System.out.println("Membership Type: " + membershipType);
     }
-    
-     public String info() {
-        String display = "Member Name: " +getName()+"  " +
-        "Member ID: " + getId()+ "  " +
-        "Contact Info: " + getContactInfo()+"  " +
-        "Membership Type: " + membershipType +"  " ;
-         return  display;
+
+    public String info() {
+        return "Member Name: " + getName() + "  " +
+               "Member ID: " + getId() + "  " +
+               "Contact Info: " + getContactInfo() + "  " +
+               "Membership Type: " + membershipType;
     }
-     
-     
+
     public static Member fromString(String str) {
-        // Parsing the string and creating a new Member object
         String[] parts = str.split(" ");
         String name = parts[2];
         String id = parts[4];
@@ -39,5 +42,4 @@ public class Member extends Person {
         String membershipType = parts[10];
         return new Member(name, id, contactInfo, membershipType);
     }
-
 }
