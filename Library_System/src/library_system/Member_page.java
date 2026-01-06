@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package library_system;
+import library_system.Classes.FileManager;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -119,15 +120,17 @@ public class Member_page extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Library lib = new Library(items_,members_,emp);
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+        Library lib = new Library();   // ← هذا السطر كان ناقص
+        FileManager.saveLibrary("A new file.txt", lib);
         JOptionPane.showMessageDialog(rootPane, lib.displayAllItems());
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }
+
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
       String id_item = JOptionPane.showInputDialog("The item id ?");
       String id_member = JOptionPane.showInputDialog("Your id ?");
-       Library lib = new Library(items_,members_,emp);
+      Library lib = new Library();
        JOptionPane.showMessageDialog(rootPane, lib.borrowItem(id_item, id_member));
     }//GEN-LAST:event_jButton2ActionPerformed
 

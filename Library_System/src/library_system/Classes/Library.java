@@ -1,97 +1,42 @@
 package library_system.Classes;
 
-import java.util.*;
-import javax.swing.JOptionPane;
 import java.io.Serializable;
+import java.util.ArrayList;
 
+public class Library implements Serializable {
 
+    private static final long serialVersionUID = 1L;
 
-public class Library implements Serializable{
-        static public ArrayList<Item> items;
-        static  public ArrayList<Member> members;
-        static  public ArrayList<Employee> employees;
-            private static final long serialVersionUID = 1L;
+    // ====== Lists ======
+    private ArrayList<Item> items;
+    private ArrayList<Member> members;
+    private ArrayList<Employee> employees;
+    private ArrayList<Loan> loans;
 
-    public Library(ArrayList<Item> items_,ArrayList<Member> members_,ArrayList<Employee> emp) {
-        items = items_;
-        members = members_;
-        employees = emp;
+    // ====== Constructor ======
+    public Library() {
+        items = new ArrayList<>();
+        members = new ArrayList<>();
+        employees = new ArrayList<>();
+        loans = new ArrayList<>();
     }
 
+    // ====== Getters (مهمة للـ GUI و FileManager) ======
+    public ArrayList<Item> getItems() {
+        return items;
+    }
 
+    public ArrayList<Member> getMembers() {
+        return members;
+    }
 
+    public ArrayList<Employee> getEmployees() {
+        return employees;
+    }
+
+    // ====== Items ======
     public void addItem(Item item) {
         items.add(item);
-    }
-
-    public void addMember(Member member) {
-        members.add(member);
-    }
-
-    public void addEmployee(Employee employee) {
-        employees.add(employee);
-    }
-
-    public String displayAllItems() {
-        String result = "";
-        for (Item item : items) {
-          result= result + item.info() + "\n";
-        }
-        return result;
-    }
-
-    public String displayAllMembers() {
-       String membtotal = "";
-        for (Member member : members) {          
-            membtotal = membtotal + member.info()+"\n";
-        }
-        return membtotal;
-    }
-
-    public String displayAllEmployees() {
-       String Emp_total = "";
-        for (Employee employee : employees) {
-            Emp_total = Emp_total + employee.info()+"\n";
-        }
-        return Emp_total;
-    }
-
-    public String borrowItem(String itemId, String memberId) {
-       String result = "";
-        Item item = findItemById(itemId);
-        Member member = findMemberById(memberId);
-        
-        if (item instanceof Borrowable && member != null) {
-            Borrowable borrowableItem = (Borrowable) item;
-            if (!borrowableItem.isBorrowed()) {
-                borrowableItem.borrowItem(member.getName());
-              result=  "Item borrowed successfully.";
-            } else {
-              result=  "Item is already borrowed.";
-            }
-        } else {
-          result="Invalid item or member.";
-        }
-        return result;
-    }
-
-    public String returnItem(String itemId) {
-       String result = "";
-        Item item = findItemById(itemId);
-        
-        if (item instanceof Borrowable) {
-            Borrowable borrowableItem = (Borrowable) item;
-            if (borrowableItem.isBorrowed()) {
-                borrowableItem.returnItem();
-              result=  "Item returned successfully.";
-            } else {
-             result =  "Item is not currently borrowed.";
-            }
-        } else {
-           result="Invalid item.";
-        }
-        
-        return result;
     }
 
     public Item findItemById(String itemId) {
@@ -103,6 +48,23 @@ public class Library implements Serializable{
         return null;
     }
 
+    public String displayAllItems() {
+        if (items.isEmpty()) {
+            return "No items in library.";
+        }
+
+        String result = "";
+        for (Item item : items) {
+            result += item.info() + "\n";
+        }
+        return result;
+    }
+
+    // ====== Members ======
+    public void addMember(Member member) {
+        members.add(member);
+    }
+
     public Member findMemberById(String memberId) {
         for (Member member : members) {
             if (member.getId().equals(memberId)) {
@@ -111,94 +73,108 @@ public class Library implements Serializable{
         }
         return null;
     }
-       
-    public boolean Log_in_Member(String name ,String memberId) {
-       boolean found = false ;
-          for (Member member : members) {
-            if (member.getId().equals(memberId) && member.getName().equals(name)) {
-                found = true;
-                return found;
-            }
-        }
-        return found;
-    }     
-      
-    public boolean Log_in_Emp(String name ,String memberId) {
-       boolean found = false ;
-          for (Employee emp : employees) {
-            if (emp.getId().equals(memberId) && emp.getName().equals(name)) {
-                found = true;
-                return found;
-            }
-        }
-        return found;
-    }
 
-   
-    
-    public static String deleteEmployeeById(String Id) {
-      String result = "";
-        Employee empToRemove = null;
-        for (Employee emplo : employees) {
-            if (emplo.getId().equals(Id)) {
-                empToRemove = emplo;
-                break;
-            }
+    public String displayAllMembers() {
+        if (members.isEmpty()) {
+            return "No members found.";
         }
-        if (empToRemove != null) {
-            employees.remove(empToRemove);
-         result =  "Employee with ID " + Id + " has been removed.";
-        } else {
-         result=  "Employee with ID " + Id + " not found.";
+
+        String result = "";
+        for (Member m : members) {
+            result += m.info() + "\n";
         }
         return result;
     }
-         
-    public static String deleteMemebrById(String Id) {
-       String result = "";
-        Member memToRemove = null;
-        for (Member member : members) {
-            if (member.getId().equals(Id)) {
-                memToRemove = member;
-                break;
+
+    public boolean Log_in_Member(String name, String id) {
+        for (Member m : members) {
+            if (m.getName().equals(name) && m.getId().equals(id)) {
+                return true;
             }
         }
-        if (memToRemove != null) {
-            members.remove(memToRemove);
-         result=   "Member with ID " + Id + " has been removed.";
-        } else {
-         result= "Member with ID " + Id + " not found.";
+        return false;
+    }
+
+    // ====== Employees ======
+    public void addEmployee(Employee employee) {
+        employees.add(employee);
+    }
+
+    public String displayAllEmployees() {
+        if (employees.isEmpty()) {
+            return "No employees found.";
         }
-        
+
+        String result = "";
+        for (Employee e : employees) {
+            result += e.info() + "\n";
+        }
         return result;
-        
-
-       }
-    
-         public void saveToFile(String fileName,Library library) {
-        FileManager.writeLibraryToFile(fileName, this);
     }
 
-   
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Items:\n");
-        for (Item item : items) {
-            sb.append(item).append("\n");
+    public boolean Log_in_Emp(String name, String id) {
+        for (Employee e : employees) {
+            if (e.getName().equals(name) && e.getId().equals(id)) {
+                return true;
+            }
         }
-        sb.append("\nMembers:\n");
-        for (Member member : members) {
-            sb.append(member).append("\n");
-        }
-        sb.append("\nEmployees:\n");
-        for (Employee employee : employees) {
-            sb.append(employee).append("\n");
-        }
-        return sb.toString();
+        return false;
     }
 
+    // ====== Borrow / Return ======
+    public String borrowItem(String itemId, String memberId) {
+        Item item = findItemById(itemId);
+        Member member = findMemberById(memberId);
+
+        if (item == null || member == null) {
+            return "Invalid item or member.";
+        }
+
+        for (Loan loan : loans) {
+            if (loan.getItem().equals(item) && !loan.isReturned()) {
+                return "Item already borrowed.";
+            }
+        }
+
+        loans.add(new Loan(item, member));
+        return "Item borrowed successfully.";
+    }
+
+    public String returnItem(String itemId) {
+        Item item = findItemById(itemId);
+
+        if (item == null) {
+            return "Item not found.";
+        }
+
+        for (Loan loan : loans) {
+            if (loan.getItem().equals(item) && !loan.isReturned()) {
+                loan.returnItem();
+                return "Item returned successfully.";
+            }
+        }
+
+        return "Item was not borrowed.";
+    }
+
+    // ====== Delete ======
+    public String deleteMemberById(String id) {
+        for (Member m : members) {
+            if (m.getId().equals(id)) {
+                members.remove(m);
+                return "Member deleted successfully.";
+            }
+        }
+        return "Member not found.";
+    }
+
+    public String deleteEmployeeById(String id) {
+        for (Employee e : employees) {
+            if (e.getId().equals(id)) {
+                employees.remove(e);
+                return "Employee deleted successfully.";
+            }
+        }
+        return "Employee not found.";
+    }
 }
-
-   
