@@ -1,4 +1,4 @@
-package library_system.Classes;
+ package library_system.Classes;
 
 public class Member extends Person {
 
@@ -14,12 +14,13 @@ public class Member extends Person {
         return membershipType;
     }
 
-    // ===== Base method for Polymorphism =====
+    // ===== Polymorphism (Base Method) =====
     // الأعضاء العاديين يدفعون رسوم أعلى
     public double calculateFee(int daysLate) {
         return daysLate * 2.0;
     }
 
+    @Override
     public void displayInfo() {
         System.out.println("Member Name: " + getName());
         System.out.println("Member ID: " + getId());
@@ -28,10 +29,12 @@ public class Member extends Person {
     }
 
     public String info() {
-        return "Member Name: " + getName() + "  " +
-               "Member ID: " + getId() + "  " +
-               "Contact Info: " + getContactInfo() + "  " +
-               "Membership Type: " + membershipType;
+        String display =
+                "Member Name: " + getName() + "  " +
+                "Member ID: " + getId() + "  " +
+                "Contact Info: " + getContactInfo() + "  " +
+                "Membership Type: " + membershipType;
+        return display;
     }
 
     public static Member fromString(String str) {

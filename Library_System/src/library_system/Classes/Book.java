@@ -1,48 +1,50 @@
 package library_system.Classes;
 
 public class Book extends Item implements Searchable {
-    private int pagenum;
+
+    private int pageNum;
     private static final long serialVersionUID = 1L;
 
-    public Book(String title, String author, String itemId, int pagenum) {
+    public Book(String title, String author, String itemId, int pageNum) {
         super(title, author, itemId);
-        this.pagenum = pagenum;
+        this.pageNum = pageNum;
     }
 
-    public int getpagenum() {
-        return pagenum;
-    }
-    
-    public void stepagenum(){
-         this.pagenum = pagenum;
+    // ===== Getters & Setters =====
+    public int getPageNum() {
+        return pageNum;
     }
 
-    @Override
-    public void display() {
-        System.out.println("Book Title: " + getTitle());
-        System.out.println("Author: " + getAuthor());
-        System.out.println("Item ID: " + getItemId());
-        System.out.println("Number of Pages: " + pagenum);
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
     }
+
+    // ===== Searchable =====
     @Override
     public boolean matches(String keyword) {
         return getTitle().toLowerCase().contains(keyword.toLowerCase())
             || getAuthor().toLowerCase().contains(keyword.toLowerCase());
     }
 
+    // ===== Display =====
+    @Override
+    public void display() {
+        System.out.println("Book Title: " + getTitle());
+        System.out.println("Author: " + getAuthor());
+        System.out.println("Item ID: " + getItemId());
+        System.out.println("Number of Pages: " + pageNum);
+    }
+
     @Override
     public String info() {
-        String result = 
-        "Book Title: " + getTitle() + "  "+
-       "Author: " + getAuthor() + "  "+
-        "Item ID: " + getItemId() + "  "+
-       "Number of Pages: " + pagenum + "  " ;
-        
-        return result;
-    } 
-    
-        public static Book fromString(String str) {
-        // Parsing the string and creating a new Book object
+        return "Book Title: " + getTitle() + "  " +
+               "Author: " + getAuthor() + "  " +
+               "Item ID: " + getItemId() + "  " +
+               "Number of Pages: " + pageNum;
+    }
+
+    // ===== File Parsing =====
+    public static Book fromString(String str) {
         String[] parts = str.split(" ");
         String title = parts[2];
         String author = parts[4];
@@ -50,5 +52,4 @@ public class Book extends Item implements Searchable {
         int pageNum = Integer.parseInt(parts[11]);
         return new Book(title, author, itemId, pageNum);
     }
-
 }

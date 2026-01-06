@@ -7,9 +7,9 @@ public class StudentMember extends Member {
     }
 
     // ===== Polymorphism =====
-    // الطلاب يدفعون أقل
+    // الطلاب يحصلون على خصم 50%
     @Override
     public double calculateFee(int daysLate) {
-        return daysLate * 1.0;
+        return super.calculateFee(daysLate) * 0.5;
     }
 }
